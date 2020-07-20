@@ -28,21 +28,27 @@ def insertion_sort(input_list):
 def selection_sort(arr):
     # loop through n-1 elements
     for i in range(0, len(arr) - 1):
-        cur_index = i
-        smallest_index = cur_index
-        # TO-DO: find next smallest element
-        # (hint, can do in 3 loc)
-        # Your code here
+        # find the smallest item in arr[i:]
+        smallest_index = i
+        for j in range(i+1, len(arr)):
+            if arr[j] < arr[smallest_index]:
+                smallest_index = j
 
-
-        # TO-DO: swap
-        # Your code here
+        # swap to put the smallest item found in its place
+        arr[i], arr[smallest_index] = arr[smallest_index], arr[i]
 
     return arr
 
 def bubble_sort(arr):
-    # Your code here
-
+    # control boolean
+    swapped = True
+    while swapped:  # while we have swapped something...
+        swapped = False
+        for i in range(1, len(arr)):
+            if arr[i] < arr[i-1]:
+                # elements are out of place, swap them
+                arr[i], arr[i-1] = arr[i-1], arr[i]
+                swapped = True
 
     return arr
 
