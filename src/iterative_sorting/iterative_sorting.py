@@ -1,4 +1,30 @@
-# TO-DO: Complete the selection_sort() function below
+""" insertion sort written by Matt during lecture """
+def insertion_sort(input_list):
+    # think of the first element as sorted
+
+    # for all unsorted items
+    for i in range(1, len(input_list)):
+        # mark the current item we are considering
+        current = input_list[i]
+
+        # look left until we find the proper
+        # place to insert the current item
+        j = i
+        while j > 0 and current < input_list[j-1]:
+            # as we are "looking left", we need to
+            # shift items to the right
+            input_list[j] = input_list[j-1]
+            j -= 1
+
+        # when we've found our insertion point (j)
+        # insert item
+        input_list[j] = current
+
+    return input_list
+
+
+# Own work below:
+
 def selection_sort(arr):
     # loop through n-1 elements
     for i in range(0, len(arr) - 1):
@@ -14,8 +40,6 @@ def selection_sort(arr):
 
     return arr
 
-
-# TO-DO:  implement the Bubble Sort function below
 def bubble_sort(arr):
     # Your code here
 
