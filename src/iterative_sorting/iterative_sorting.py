@@ -1,24 +1,54 @@
-# TO-DO: Complete the selection_sort() function below
+""" insertion sort written by Matt during lecture """
+def insertion_sort(input_list):
+    # think of the first element as sorted
+
+    # for all unsorted items
+    for i in range(1, len(input_list)):
+        # mark the current item we are considering
+        current = input_list[i]
+
+        # look left until we find the proper
+        # place to insert the current item
+        j = i
+        while j > 0 and current < input_list[j-1]:
+            # as we are "looking left", we need to
+            # shift items to the right
+            input_list[j] = input_list[j-1]
+            j -= 1
+
+        # when we've found our insertion point (j)
+        # insert item
+        input_list[j] = current
+
+    return input_list
+
+
+# Own work below:
+
 def selection_sort(arr):
     # loop through n-1 elements
     for i in range(0, len(arr) - 1):
-        cur_index = i
-        smallest_index = cur_index
-        # TO-DO: find next smallest element
-        # (hint, can do in 3 loc)
-        # Your code here
+        # find the smallest item in arr[i:]
+        smallest_index = i
+        for j in range(i+1, len(arr)):
+            if arr[j] < arr[smallest_index]:
+                smallest_index = j
 
-
-        # TO-DO: swap
-        # Your code here
+        # swap to put the smallest item found in its place
+        arr[i], arr[smallest_index] = arr[smallest_index], arr[i]
 
     return arr
 
-
-# TO-DO:  implement the Bubble Sort function below
 def bubble_sort(arr):
-    # Your code here
-
+    # control boolean
+    swapped = True
+    while swapped:  # while we have swapped something...
+        swapped = False
+        for i in range(1, len(arr)):
+            if arr[i] < arr[i-1]:
+                # elements are out of place, swap them
+                arr[i], arr[i-1] = arr[i-1], arr[i]
+                swapped = True
 
     return arr
 
@@ -40,7 +70,31 @@ buckets.
 What is the time and space complexity of the counting sort algorithm?
 '''
 def counting_sort(arr, maximum=None):
-    # Your code here
+    # Handle empty arrarys
+    if len(arr) == 0:
+        return arr
 
+    # If maximum is not specified, find it
+    if maximum is None:
+        maximum = arr[0]
+        for i in range(1, len(arr)):
+            if arr[i] > maximum:
+                maximum = arr[i]  # save highest value found
+    
+    # Initialize an array to keep count
+    counts = [0] * (maximum + 1)
+
+    # Iterate through arr once, counting occurences of each value
+    for i in range(len(arr)):
+        # Check for negative numbers (not allowed)
+        if arr[i] < 0:
+            return "Error, negative numbers not allowed in Count Sort"
+        counts[arr[i]] += 1
+    
+    # Rebuild arr using the counts array
+    arr = []
+    for i in range(len(counts)):
+        for _ in range(counts[i]):
+            arr.append(i)
 
     return arr
